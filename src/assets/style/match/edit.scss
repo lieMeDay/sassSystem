@@ -1,0 +1,20 @@
+.editTit{
+    // width: 450px;
+    height: 35px;
+    float: left;
+    background-color: #EAEAEA;
+    margin: 15px 0;
+    border-radius: 18px;
+    text-align: center;
+    cursor: pointer;
+    >span{
+        float: left;
+        width: 150px;
+        line-height: 35px;
+        &.act{
+            background-color: #3383FF;
+            color: #fff;
+            border-radius: 18px;
+        }
+    }
+}

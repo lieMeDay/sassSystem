@@ -1,0 +1,30 @@
+.MatchForm {
+    .minWidth {
+        width: 450px;
+    }
+
+    // .tab {
+    //     width: 100%;
+    //     text-align: center;
+    //     border: 1px solid #ccc;
+    // }
+
+    .tab {
+        width: 100%;
+        text-align: center;
+        border-right: 1px solid #ebeef5;
+        border-bottom: 1px solid #ebeef5;
+        .addBigPoint{
+            cursor: pointer;
+        }
+        td {
+            width:33%;
+            border-left: 1px solid #ebeef5;
+            border-top: 1px solid #ebeef5;
+            .tdipt{
+                width: 80%;
+                margin: 5px auto;
+            }
+        }
+    }
+}

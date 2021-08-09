@@ -1,0 +1,205 @@
+.editGroupWrap {
+    width: calc(100% - 40px);
+    padding: 20px;
+    background-color: #fff;
+    overflow: hidden;
+
+    .editGroupTitBox {
+        width: 100%;
+        overflow: hidden;
+
+        .bigtit {
+            color: #3383FF;
+            font-weight: bold;
+            margin-right: 20px;
+            float: left;
+            line-height: 40px;
+        }
+
+        .addBtn {
+            margin-right: 20px;
+            float: left;
+            line-height: 40px;
+            cursor: pointer;
+            &.blue{
+                color: #3383FF;
+            }
+        }
+
+        ul {
+            float: left;
+
+            li {
+                float: left;
+                margin-right: 20px;
+                line-height: 22px;
+                padding: 5px 8px;
+                margin-top: 4px;
+                cursor: pointer;
+
+                &.act {
+                    color: #fff;
+                    background-color: #3383FF;
+                    border-radius: 18px;
+                }
+            }
+        }
+    }
+
+    .left_box,
+    .right_box {
+        width: calc(50% - 12px);
+        float: left;
+        border: 1px solid #EEEEEE;
+        border-radius: 3px;
+    }
+
+    .redStare {
+        color: #F56C6C;
+    }
+
+    .left_box {
+
+        ul {
+            width: 100%;
+            overflow: hidden;
+            margin-top: 20px;
+
+            li {
+                width: 100%;
+                position: relative;
+                margin-bottom: 20px;
+                display: flex;
+                line-height: 40px;
+
+                div {
+                    @include nameTit();
+                }
+
+                .iptWidth {
+                    @include detailconBox();
+                    width: calc(100% - 110px);
+                }
+
+                .HasNull {
+                    color: #F56C6C;
+                    position: absolute;
+                    left: 100px;
+                    top: 40px;
+                    font-size: 14px;
+                    line-height: 1;
+                }
+            }
+        }
+    }
+
+    .right_box {
+        float: right;
+        .upload-demo {
+            margin: 5px 0;
+            position: relative;
+            height: 40px;
+            line-height: 40px;
+
+            // >>>.el-upload-list {
+            //     width: calc(100% - 130px);
+            //     float: right;
+            // }
+            .KMlBtn {
+                width: 130px;
+                // float: left;
+                position: relative;
+                color: #fff;
+                background-color: #409eff;
+                border-radius: 4px;
+                text-align: center;
+                cursor: pointer;
+                margin: 0px auto;
+
+                input {
+                    opacity: 0;
+                    width: 100%;
+                    height: 40px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+    .bottom_box{
+        width: 100%;
+        float: left;
+        >div{
+            margin: 5px auto;
+        }
+        .botTit{
+            @include nameTit();
+            width: 100px;
+        }
+        
+
+        .choseImg {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            line-height: 100px;
+            text-align: center;
+            position: relative;
+            cursor: pointer;
+
+            .chImgBtn {
+                opacity: 0;
+                width: 100px;
+                height: 100px;
+                position: absolute;
+                top: 0;
+                left: 0;
+                cursor: pointer;
+            }
+        }
+
+        .avatar-uploader-icon {
+            font-size: 28px;
+            color: #8c939d;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        .cpPic {
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            width: 100px;
+            height: 100px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .avatar-uploader-icon {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                z-index: -1;
+                color: white;
+                background-color: rgba($color: #000, $alpha: 0.4);
+            }
+
+            &:hover .avatar-uploader-icon {
+                z-index: 2;
+                opacity: 1;
+            }
+        }
+
+        .saveBtn{
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}

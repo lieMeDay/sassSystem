@@ -1,0 +1,225 @@
+$theme-Color:#004FBF;
+$font-d9:#D9D9D9;
+$font-f0:#F0F0F0;
+$font-9:#999;
+
+@mixin gradient_two($topColor, $bottomColor) {
+    background: -webkit-linear-gradient($topColor, $bottomColor);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient($topColor, $bottomColor);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient($topColor, $bottomColor);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient($topColor, $bottomColor);
+    /* 标准的语法 */
+}
+
+@mixin gradient_three-leftStart($leftColor, $middleColor, $rightColor) {
+    background: -webkit-linear-gradient(left, $leftColor, $middleColor, $rightColor);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, $leftColor, $middleColor, $rightColor);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, $leftColor, $middleColor, $rightColor);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(right, $leftColor, $middleColor, $rightColor);
+    /* 标准的语法 */
+}
+
+@mixin gradient_leftToRight($leftColor, $rightColor) {
+    background: -webkit-linear-gradient(left, $leftColor, $rightColor);
+    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, $leftColor, $rightColor);
+    /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, $leftColor, $rightColor);
+    /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, $leftColor, $rightColor);
+    /* 标准的语法 */
+}
+
+@mixin flex {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+@mixin flex-align-center {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+@mixin flex-pack-center {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+@mixin flex-pack-flex-end {
+    -webkit-box-pack: flex-end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: flex-end;
+    justify-content: flex-end;
+}
+
+@mixin flex-justify-center($item) {
+    -webkit-box-pack: $item;
+    -webkit-justify-content: $item;
+    -ms-flex-pack: $item;
+    justify-content: $item;
+}
+
+@mixin flex-num($num) {
+    -webkit-box-flex: $num;
+    -webkit-flex: $num;
+    -ms-flex: $num;
+    flex: $num;
+}
+
+@mixin flex-v {
+    -webkit-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+@mixin box-shadow($b1, $b2, $b3, $color) {
+    box-shadow: $b1 $b2 $b3 $color;
+    -moz-box-shadow: $b1 $b2 $b3 $color;
+    -webkit-box-shadow: $b1 $b2 $b3 $color;
+}
+
+// 单行省略
+@mixin ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 多行省略
+@mixin ellipsisMore($row) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $row;
+    -webkit-box-orient: vertical;
+}
+
+// 垂直居中
+@mixin s_middle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    /* IE 9 */
+    -moz-transform: translateY(-50%);
+    /* Firefox */
+    -webkit-transform: translateY(-50%);
+    /* Safari 和 Chrome */
+    -o-transform: translateY(-50%);
+}
+
+// 水平绝对居中
+@mixin h_center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    /* IE 9 */
+    -moz-transform: translateX(-50%);
+    /* Firefox */
+    -webkit-transform: translateX(-50%);
+    /* Safari 和 Chrome */
+    -o-transform: translateX(-50%);
+}
+
+// 水平垂直绝对居中
+@mixin hs_center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    /* IE 9 */
+    transform: translate(-50%, -50%);
+    /* Firefox */
+    transform: translate(-50%, -50%);
+    /* Safari 和 Chrome */
+    transform: translate(-50%, -50%);
+}
+
+
+// 向下实心箭头
+@mixin arrow-down($bColor) {
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 12px solid $bColor;
+    margin-left: 5px;
+}
+
+@mixin scrollCss-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background: #535353;
+}
+
+@mixin scrollCss-track {
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}
+
+@mixin shu() {
+    width: 5px;
+    height: 20px;
+    float: left;
+    background-color: #1abc9c;
+}
+@mixin conBox{
+    width: calc(100% - 30px);
+    padding: 15px 15px;
+    background-color: #fff;
+}
+
+@mixin nameTit {
+    width: 88px;
+    margin-right: 12px;
+    float: left;
+    text-align: right;
+    line-height: 40px;
+}
+
+@mixin detailconBox {
+    width: calc(100% - 100px);
+    float: right;
+    margin-right: 0;
+}
+// 标题 带蓝色下边框
+@mixin titBox {
+    width: 100%;
+    border-bottom: 2px solid #3383ff;
+    line-height: 30px;
+    color: #333e5f;
+    font-weight: 500;
+}
+// 内容外部盒子 padding
+@mixin  padShow {
+  background-color: #fff;
+  width: calc(100% - 40px);
+  padding: 20px;
+  overflow: hidden;
+}
+// 弹框 阴影
+@mixin alertBox {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.2);
+}

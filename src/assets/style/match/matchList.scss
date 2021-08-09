@@ -1,0 +1,140 @@
+$PicUrl:'/static/images/match';
+.MatchListWrap {
+  margin: 15px auto;
+
+  .MatchListBox {
+    width: 100%;
+    height: 200px;
+    background-color: #fff;
+    padding: 5px 0 15px 0;
+    overflow: hidden;
+    margin-bottom: 15px;
+    // transition: height 1s ease;
+    &:last-child{
+      margin-bottom: 0;
+    }
+    &.short{
+      height: inherit;
+      text-align: center;
+    }
+
+    .titBox {
+      width: 98%;
+      margin: 0 auto;
+      height: 45px;
+      line-height: 45px;
+      color: #919191;
+      .titCon {
+        float: left;
+      }
+      .titIcon{
+        width: 41px;
+        height: 41px;
+        margin-top: 2px;
+        float: left;
+        
+      }
+
+      >span {
+        float: right;
+        cursor: pointer;
+      }
+    }
+    .MatchCon{
+      width: 100%;
+      overflow: hidden;
+      li{
+        cursor: pointer;
+        float: left;
+        width: calc(25% - 15px);
+        height: 155px;
+        background-color: #3383FF;
+        color: #fff;
+        position: relative;
+        margin-bottom: 15px;
+        .bjImg{
+          width: 100%;
+          position: absolute;
+          bottom: 0;
+          height: 45px;
+          background: url('#{$PicUrl}/a.png') no-repeat top center;
+          background-size: 100%;
+          z-index: 5;
+        }
+        &:nth-child(4n-2),
+        &:nth-child(4n-1),
+        &:nth-child(4n){
+          margin-left: 20px;
+        }
+        .fixedMatch{
+          color: #3383FF;
+        }
+        &:nth-child(4n-2){
+          background-color: #F85C5D;
+          .fixedMatch{
+            color: #F85C5D;
+          }
+          .bjImg{
+            background: url('#{$PicUrl}/b.png') no-repeat top center;
+            background-size: 100%;
+          }
+        }
+        &:nth-child(4n-1){
+          background-color: #FFC53D;
+          .fixedMatch{
+            color: #F85C5D;
+          }
+          .bjImg{
+            background: url('#{$PicUrl}/c.png') no-repeat top center;
+            background-size: 100%;
+          }
+        }
+        &:nth-child(4n){
+          background-color: #73D13D;
+          .fixedMatch{
+            color: #73D13D;
+          }
+          .bjImg{
+            background: url('#{$PicUrl}/d.png') no-repeat top center;
+            background-size: 100%;
+          }
+        }
+        .delMatch{
+          float: right;
+          font-size: 20px;
+          cursor: pointer;
+        }
+        .matchCon{
+          width: 95%;
+          height: 90px;
+          margin: 0 auto;
+          margin-top: 20px;
+          position: relative;
+          .fixedMatch{
+            position: absolute;
+            top: 45px;
+            right: 0;
+            background-color: #fff;
+            width: 80px;
+            font-size: 12px;
+            line-height: 25px;
+            border-radius: 10px;
+            // color: #3383FF;
+            text-align: center;
+            cursor: pointer;
+          }
+          >p{
+            width: 100%;
+            font-size: 12px;
+            line-height: 20px;
+            @include ellipsis()
+          }
+          .name{
+            font-size: 22px;
+            line-height: 30px;
+          }
+        }
+      }
+    }
+  }
+}
