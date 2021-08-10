@@ -40,6 +40,7 @@
       @selection-change="handleSelectionChange"
       @sort-change="sortChange"
       style="width: 100%"
+      v-loading="tabLoading"
     >
       <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column type="expand">
@@ -242,7 +243,8 @@ export default {
       aC: 1,
       bP: 5,
       bC: 1,
-      conLoading:false
+      conLoading:false,
+      tabLoading:false
     };
   },
   methods: {
@@ -274,9 +276,11 @@ export default {
     },
     // 获取所有
     getAll() {
+      this.tabLoading=true
       this.$axios.get("/wallet/getPersonWalletList").then((res) => {
         let rr = res.data.data;
         this.tableData = rr;
+      this.tabLoading=false
       });
     },
     // 切换展开 表格
@@ -410,7 +414,8 @@ export default {
                     this.$message.success("记录添加成功");
                     this.dialogFormVisible = false;
                     if (this.mId && this.gId) this.search();
-                    else this.getAll();
+                    else this.search()
+                    // this.getAll();
                     this.clear();
                   }
                 });
@@ -453,6 +458,7 @@ export default {
     },
     // 查询
     search() {
+      this.tabLoading=true
       // console.log(this.mId,this.gId)
       let oo = {
         matchId: Number(this.mId),
@@ -470,6 +476,7 @@ export default {
           });
           this.showMore = true;
           this.tableData = rr;
+      this.tabLoading=false
         });
     },
     // 多选
@@ -508,7 +515,8 @@ export default {
     },
   },
   created() {
-    this.getAll();
+    // this.getAll();
+    this.search()
     this.getMatch();
     this.actionUrl = this.$img_url + "/match/uploadImg";
   },

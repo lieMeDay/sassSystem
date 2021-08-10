@@ -13,7 +13,7 @@
         ></el-date-picker>
       </el-form-item>
       <el-form-item label="提现状态">
-        <el-select v-model="state" placeholder="提现状态" @change="show=false">
+        <el-select v-model="state" placeholder="提现状态" @change="tableData=[];show=false">
           <el-option label="待审核" :value="1"></el-option>
           <el-option label="提现通过" :value="2"></el-option>
           <el-option label="提现未通过" :value="3"></el-option>
