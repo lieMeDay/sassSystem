@@ -218,6 +218,11 @@ export default {
         .then((res) => {
           let rr = res.data.data;
           this.loading = false;
+          if(rr){
+            rr.forEach(v=>{
+              v.showRegion=v.region.split(';').filter(s=>{return s!=''}).join('/')
+            })
+          }
           this.tableData = rr ? rr : [];
           this.allData = JSON.parse(JSON.stringify(this.tableData));
         });
@@ -271,8 +276,13 @@ export default {
     port() {
       let column = [
         {
+          title: "昵称",
+          key: "nikeName",
+          type: "text",
+        },
+        {
           title: "姓名",
-          key: "name",
+          key: "memberName",
           type: "text",
         },
         {

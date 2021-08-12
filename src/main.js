@@ -25,7 +25,7 @@ Vue.use(VueQuillEditor);
 // axios
 import axios from 'axios'
 Vue.prototype.$axios = axios;
-// axios.defaults.baseURL = 'http://192.168.0.109:9898'
+// axios.defaults.baseURL = 'http://192.168.62.63:9898'
 axios.defaults.baseURL = 'http://report.lvtutech.com/game/'
 // Vue.prototype.$img_url = 'http://192.168.0.109:9898'
 Vue.prototype.$img_url = 'http://report.lvtutech.com/game/'

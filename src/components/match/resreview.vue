@@ -8,20 +8,22 @@
         <div class="tBox tb1">
           <b>赛项名称</b>
           <span
-            v-for="(v,i) in matchMsg.matchInfo"
+            v-for="(v, i) in matchMsg.matchInfo"
             :key="i"
-            :class="{'act':v.id==groupId}"
+            :class="{ act: v.id == groupId }"
             @click="toggle(v.id)"
-          >{{v.name}}</span>
+            >{{ v.name }}</span
+          >
         </div>
         <div class="tBox tb1">
           <b>审核状态</b>
           <span
-            v-for="(v,i) in statesList"
+            v-for="(v, i) in statesList"
             :key="i"
-            :class="{'act':i==sind}"
+            :class="{ act: i == sind }"
             @click="getsd(i)"
-          >{{v.val}}</span>
+            >{{ v.val }}</span
+          >
         </div>
         <!-- <div class="impBtn">
           <div class="impPer">
@@ -38,15 +40,31 @@
       element-loading-spinner="el-icon-loading"
     >
       <div class="iptBox">
-        <el-input class="seaIpt" v-model="seachVal" placeholder="请输入姓名或参赛号查询" @change="subsea"></el-input>
+        <el-input
+          class="seaIpt"
+          v-model="seachVal"
+          placeholder="请输入姓名或参赛号查询"
+          @change="subsea"
+        ></el-input>
         <el-button type="primary" @click="subsea">搜索</el-button>
-        <el-button type="primary" class="portBtn" @click="portTable" v-if="!$newActive">成绩导出</el-button>
+        <el-button
+          type="primary"
+          class="portBtn"
+          @click="portTable"
+          v-if="!$newActive"
+          >成绩导出</el-button
+        >
       </div>
       <!-- header-row-class-name="tableHead" -->
       <el-table
         ref="table"
         border
-        :data="tableData.slice((currentPagerm-1)*pagesize,currentPagerm*pagesize)"
+        :data="
+          tableData.slice(
+            (currentPagerm - 1) * pagesize,
+            currentPagerm * pagesize
+          )
+        "
         :row-key="getRowKeys"
         :expand-row-keys="expands"
         @expand-change="zydescription"
@@ -56,58 +74,78 @@
         <el-table-column type="expand" v-if="!$newActive">
           <template slot-scope="props">
             <el-form label-position="left">
-              <el-form-item label="打卡详情" v-if="matchMsg.continuity!=1">
+              <el-form-item label="打卡详情" v-if="matchMsg.continuity != 1">
                 <el-table :data="props.row.CardMsg" border style="width: 100%">
-                  <el-table-column prop="cpName" align="center" label="cp名称"></el-table-column>
-                  <el-table-column prop="distance" align="center" label="距离"></el-table-column>
-                  <el-table-column prop="showUseTime" align="center" label="用时"></el-table-column>
+                  <el-table-column
+                    prop="cpName"
+                    align="center"
+                    label="cp名称"
+                  ></el-table-column>
+                  <el-table-column
+                    prop="distance"
+                    align="center"
+                    label="距离"
+                  ></el-table-column>
+                  <el-table-column
+                    prop="showUseTime"
+                    align="center"
+                    label="用时"
+                  ></el-table-column>
                   <el-table-column align="center" label="打卡图片">
-                    <template slot-scope="{row}">
+                    <template slot-scope="{ row }">
                       <img class="cimg" :src="row.cpImg" alt />
                     </template>
                   </el-table-column>
                 </el-table>
               </el-form-item>
-              <el-form-item label="完赛证明" v-if="matchMsg.continuity!=1">
+              <el-form-item label="完赛证明" v-if="matchMsg.continuity != 1">
                 <!-- <div class="df">
                   <span class="f">openId：</span>
                   <span>{{props.row.openId}}</span>
                 </div>-->
-                <div v-if="props.row.endFile" style="float:left;width:100%;">
+                <div v-if="props.row.endFile" style="float: left; width: 100%">
                   <div class="df">
                     <span class="f">距离：</span>
-                    <span>{{props.row.endFile.suppDistence}}</span>
+                    <span>{{ props.row.endFile.suppDistence }}</span>
                   </div>
                   <div class="df">
                     <span class="f">用时：</span>
-                    <span>{{props.row.endFile.showsuppUseTime}}</span>
+                    <span>{{ props.row.endFile.showsuppUseTime }}</span>
                   </div>
                   <div class="df">
                     <span class="f">配速：</span>
-                    <span>{{props.row.endFile.suppPace}}</span>
+                    <span>{{ props.row.endFile.suppPace }}</span>
                   </div>
                   <div class="df">
                     <span class="f">上升：</span>
-                    <span>{{props.row.endFile.suppUpDis}}</span>
+                    <span>{{ props.row.endFile.suppUpDis }}</span>
                   </div>
                   <div class="df">
                     <span class="f">截图：</span>
                     <img
                       class="jtimg"
-                      v-for="(v,i) in props.row.endFile.imgList"
+                      v-for="(v, i) in props.row.endFile.imgList"
                       :key="i"
                       :src="v"
-                      @click="rfToggle(props.row.endFile.imgList,i)"
+                        v-showImgArr="{ list: props.row.endFile.imgList, ind: i }"
                     />
                   </div>
                 </div>
                 <span v-else>暂无</span>
               </el-form-item>
               <!-- 上传列表 -->
-              <el-form-item label v-show="matchMsg.continuity==1">
-                <el-table :data="continuityDetailS.slice((cur-1)*page,cur*page)" class="tcB">
-                  <el-table-column prop="matchKey" label="上传时间" align="center" width="260">
-                    <template slot-scope="{row}">
+              <el-form-item label v-show="matchMsg.continuity == 1">
+                <el-table
+                  :data="continuityDetailS.slice((cur - 1) * page, cur * page)"
+                  class="tcB"
+                >
+                  <el-table-column
+                    prop="matchKey"
+                    label="上传时间"
+                    align="center"
+                    width="260"
+                  >
+                    <template slot-scope="{ row }">
                       <el-date-picker
                         v-if="row.edit"
                         v-model="row.matchKey"
@@ -116,57 +154,69 @@
                         value-format="yyyy/MM/dd HH:mm"
                         format="yyyy/MM/dd HH:mm"
                       ></el-date-picker>
-                      <span v-else>{{row.matchKey}}</span>
+                      <span v-else>{{ row.matchKey }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column label="距离" align="center" width="100">
-                    <template slot-scope="{row}">
+                    <template slot-scope="{ row }">
                       <el-input
                         v-if="row.edit"
                         v-model="row.suppDistence"
                         size="mini"
                         @input="$forceUpdate()"
                       ></el-input>
-                      <span v-else>{{row.suppDistence}}</span>
+                      <span v-else>{{ row.suppDistence }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column label="用时" align="center" width="150">
-                    <template slot-scope="{row}">
+                    <template slot-scope="{ row }">
                       <el-time-picker
-                        style="width:120px;"
+                        style="width: 120px"
                         v-if="row.edit"
                         value-format="HH:mm:ss"
                         v-model="row.showsuppUseTime"
-                        :picker-options="{selectableRange: '00:00:00 - 23:59:59'}"
+                        :picker-options="{
+                          selectableRange: '00:00:00 - 23:59:59',
+                        }"
                         placeholder="任意时间点"
                       ></el-time-picker>
-                      <span v-else>{{row.showsuppUseTime}}</span>
+                      <span v-else>{{ row.showsuppUseTime }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column label="上升" align="center" width="60">
-                    <template slot-scope="{row}">
-                      <span>{{row.suppUpDis}}</span>
+                    <template slot-scope="{ row }">
+                      <span>{{ row.suppUpDis }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column label="配速" align="center" width="80">
-                    <template slot-scope="{row}">
-                      <span>{{row.suppPace}}</span>
+                    <template slot-scope="{ row }">
+                      <span>{{ row.suppPace }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column label="是否有效" align="center" width="100">
-                    <template slot="header" slot-scope="{row}">
+                    <template slot="header">
                       <span
-                        :class="['cGD',continuityGood?'continuityGood':'']"
+                        :class="['cGD', continuityGood ? 'continuityGood' : '']"
                         @click="toggleContinue(1)"
-                      >有效</span>
+                        >有效</span
+                      >
                       /
                       <span
-                        :class="['cGD',!continuityGood?'continuityGood':'']"
+                        :class="[
+                          'cGD',
+                          !continuityGood ? 'continuityGood' : '',
+                        ]"
                         @click="toggleContinue(0)"
-                      >无效</span>
+                        >无效</span
+                      >
                     </template>
-                    <template slot-scope="{row}">
-                      <el-select v-if="row.edit" size="mini" v-model="row.ss" placeholder="请选择">
+                    <template slot-scope="{ row }">
+                      <el-select
+                        v-if="row.edit"
+                        size="mini"
+                        v-model="row.ss"
+                        placeholder="请选择"
+                      >
                         <el-option
                           v-for="item in ssss"
                           :key="item.label"
@@ -174,26 +224,35 @@
                           :value="item.label"
                         ></el-option>
                       </el-select>
-                      <span v-else>{{row.ss}}</span>
+                      <span v-else>{{ row.ss }}</span>
                     </template>
                   </el-table-column>
                   <el-table-column label="截图" align="center" width="120">
-                    <template slot-scope="{row}">
+                    <template slot-scope="{ row }">
                       <img
                         class="jtimg"
                         :src="row.imgList[0]"
-                        v-showImgArr="{list:row.imgList,ind:0}"
+                        v-showImgArr="{ list: row.imgList, ind: 0 }"
                       />
                     </template>
                   </el-table-column>
                   <el-table-column label="操作" align="center" width="100">
-                    <template slot-scope="{row}">
+                    <template slot-scope="{ row }">
                       <el-button
                         type="text"
                         v-if="!row.edit"
-                        @click="row.edit=true;$forceUpdate()"
-                      >编辑</el-button>
-                      <el-button type="text" v-else @click="saveEdit(row,props.row)">保存</el-button>
+                        @click="
+                          row.edit = true;
+                          $forceUpdate();
+                        "
+                        >编辑</el-button
+                      >
+                      <el-button
+                        type="text"
+                        v-else
+                        @click="saveEdit(row, props.row)"
+                        >保存</el-button
+                      >
                     </template>
                   </el-table-column>
                 </el-table>
@@ -207,8 +266,17 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column label="参赛号" prop="entryNumber" align="center" v-if="!$newActive"></el-table-column>
-        <el-table-column label="姓名" prop="memberName" align="center"></el-table-column>
+        <el-table-column
+          label="参赛号"
+          prop="entryNumber"
+          align="center"
+          v-if="!$newActive"
+        ></el-table-column>
+        <el-table-column
+          label="姓名"
+          prop="memberName"
+          align="center"
+        ></el-table-column>
         <el-table-column
           label="公里数"
           align="center"
@@ -216,14 +284,14 @@
           sortable="custom"
           v-if="!$newActive"
         >
-          <template slot-scope="{row}">
+          <template slot-scope="{ row }">
             <el-input
-              v-if="row.canEdit&&row.inEdit"
+              v-if="row.canEdit && row.inEdit"
               v-model="row.showDistance"
               size="mini"
               @input="$forceUpdate()"
             ></el-input>
-            <span v-else>{{row.showDistance}}</span>
+            <span v-else>{{ row.showDistance }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -233,25 +301,25 @@
           sortable="custom"
           v-if="!$newActive"
         >
-          <template slot-scope="{row}">
+          <template slot-scope="{ row }">
             <el-input
-              v-if="row.canEdit&&row.inEdit"
+              v-if="row.canEdit && row.inEdit"
               v-model="row.endUsetime"
               size="mini"
               @input="$forceUpdate()"
             ></el-input>
-            <span v-else>{{row.endUsetime}}</span>
+            <span v-else>{{ row.endUsetime }}</span>
           </template>
         </el-table-column>
         <el-table-column label="打卡时间" align="center" v-if="$newActive">
-          <template slot-scope="{row}">
+          <template slot-scope="{ row }">
             <el-input
-              v-if="row.canEdit&&row.inEdit"
+              v-if="row.canEdit && row.inEdit"
               v-model="row.endUsetime"
               size="mini"
               @input="$forceUpdate()"
             ></el-input>
-            <span v-else>{{row.endUsetime}}</span>
+            <span v-else>{{ row.endUsetime }}</span>
           </template>
         </el-table-column>
         <el-table-column
@@ -259,36 +327,50 @@
           sortable="custom"
           prop="goodCount"
           align="center"
-          v-show="!$newActive&&matchMsg.continuity==1"
+          v-show="!$newActive && matchMsg.continuity == 1"
         ></el-table-column>
-        <el-table-column label="爬升" align="center" v-if="!$newActive&&matchMsg.continuity!=1">
-          <template slot-scope="{row}">
+        <el-table-column
+          label="爬升"
+          align="center"
+          v-if="!$newActive && matchMsg.continuity != 1"
+        >
+          <template slot-scope="{ row }">
             <el-input
-              v-if="row.canEdit&&row.inEdit"
+              v-if="row.canEdit && row.inEdit"
               v-model="row.altitude"
               size="mini"
               @input="$forceUpdate()"
             ></el-input>
-            <span v-else>{{row.altitude}}</span>
+            <span v-else>{{ row.altitude }}</span>
           </template>
         </el-table-column>
         <el-table-column label="海拔" align="center" v-if="$newActive">
-          <template slot-scope="{row}">
+          <template slot-scope="{ row }">
             <el-input
-              v-if="row.canEdit&&row.inEdit"
+              v-if="row.canEdit && row.inEdit"
               v-model="row.altitude"
               size="mini"
               @input="$forceUpdate()"
             ></el-input>
-            <span v-else>{{row.altitude}}</span>
+            <span v-else>{{ row.altitude }}</span>
           </template>
         </el-table-column>
         <el-table-column label="打卡图片" align="center" v-if="$newActive">
-          <template slot-scope="{row}">
-            <img :src="row.cpImg" alt class="activeImg" @click="rfToggle(row.cpImg,0)" />
+          <template slot-scope="{ row }">
+            <img
+              :src="row.cpImg"
+              alt
+              class="activeImg"
+                        v-showImgArr="{ list: [row.cpImg], ind: 0 }"
+            />
           </template>
         </el-table-column>
-        <el-table-column label="审核状态" prop="state" align="center" v-if="!showBad"></el-table-column>
+        <el-table-column
+          label="审核状态"
+          prop="state"
+          align="center"
+          v-if="!showBad"
+        ></el-table-column>
         <el-table-column
           label="无效条数"
           prop="badCount"
@@ -305,7 +387,12 @@
                 @click="toogleExpand(scope.row)"
                 v-if="!$newActive"
               >信息查看</el-button>-->
-              <el-button type="primary" size="medium" @click="Examine(scope.row)">完赛审核</el-button>
+              <el-button
+                type="primary"
+                size="medium"
+                @click="Examine(scope.row)"
+                >完赛审核</el-button
+              >
               <!-- <el-button
                 type="danger"
                 size="medium"
@@ -315,14 +402,19 @@
               <el-button
                 type="danger"
                 size="medium"
-                v-if="scope.row.canEdit&&!scope.row.inEdit"
-                @click="scope.row.inEdit=true;$forceUpdate()"
-              >信息修改</el-button>
+                v-if="scope.row.canEdit && !scope.row.inEdit"
+                @click="
+                  scope.row.inEdit = true;
+                  $forceUpdate();
+                "
+                >信息修改</el-button
+              >
               <el-button
                 type="success"
-                v-if="scope.row.canEdit&&scope.row.inEdit"
+                v-if="scope.row.canEdit && scope.row.inEdit"
                 @click="subEdit(scope.row)"
-              >保存信息</el-button>
+                >保存信息</el-button
+              >
             </div>
           </template>
         </el-table-column>
@@ -339,12 +431,12 @@
       <div class="centerWrap">
         <div class="aTit">
           <span>审核提示</span>
-          <i class="el-icon-close" @click="showAlert=!showAlert"></i>
+          <i class="el-icon-close" @click="showAlert = !showAlert"></i>
         </div>
         <div class="aCon">
           <div>
             <span>选手姓名：</span>
-            <span>{{alertdata.memberName}}</span>
+            <span>{{ alertdata.memberName }}</span>
           </div>
           <div>
             <span>审核结果：</span>
@@ -363,13 +455,17 @@
             :rows="4"
             placeholder="请输入内容"
             v-model="textarea"
-            v-if="shValue==2"
+            v-if="shValue == 2"
           ></el-input>
         </div>
         <div class="aBtn">
-          <el-button @click="showAlert=!showAlert">取消</el-button>
-          <el-button type="primary" @click="subState" v-if="!$newActive">确认</el-button>
-          <el-button type="primary" @click="activeSub" v-if="$newActive">确认</el-button>
+          <el-button @click="showAlert = !showAlert">取消</el-button>
+          <el-button type="primary" @click="subState" v-if="!$newActive"
+            >确认</el-button
+          >
+          <el-button type="primary" @click="activeSub" v-if="$newActive"
+            >确认</el-button
+          >
         </div>
       </div>
     </div>
